@@ -89,11 +89,11 @@ Using dynamic fingerprint, we can calculate how much of the text was written by 
 
 "Good" author has stable fingerprint that has a stable style that does not change over time:
 
-<img src="images/good_author.png" alt="good_author" width="500">
+<img src="images/good_author.png" alt="good_author" width="600">
 
 Our author has stable fingerprint in starts of career:
 
-<img src="images/early_author.png" alt="good_author" width="500">
+<img src="images/early_author.png" alt="good_author" width="600">
 
 But after a while texts contains clear blocks of fragments that writed in different styles.
 
