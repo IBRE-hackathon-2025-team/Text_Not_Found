@@ -41,7 +41,7 @@ A small spoiler: we created a **pipeline for text authorship analysis using k-me
 
 ## Data preparation
 
-1) Books come in different formats, but we decided to use .txt. We wrote a converter from .fb2 → .txt, which can be found here: [название файла]
+1) Books come in different formats, but we decided to use .txt. We wrote a converter from .fb2 → .txt, which can be found here: [fb2_txt_converter.py](code/fb2_txt_converter.py)
 
 2) We tested several preprocessing methods (see [название файла]):
 
