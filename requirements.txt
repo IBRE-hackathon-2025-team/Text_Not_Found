@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn
+scipy
+seaborn
+matplotlib
+plotly
+spacy
+pydantic
+langchain-gigachat
+beautifulsoup4
+giotto-tda
+python-dotenv
