@@ -1,79 +1,93 @@
 # Text Not Found ...
 
-Here we present a work analyzing the authorship of books by a very productive writer and private detective enthusiast. She is writing books for 26 years, for now there are 381 finished books, which means that on average she writing around 15! books per year or 1.2 in one month... It is suspicious, is not it? Some people believe that this writer's pugs (small dogs) help her write her books.
+Here we present a work analyzing the authorship of books by a very productive writer and private detective enthusiast.  
+She has been writing for 26 years and has already published **381 books**.  
+This means she writes around **15 books per year** — or **1.2 per month**.  
+ 
+<img src="plots/writing_stat.png" alt="Writing trend" width="400">
 
-[место для статистики по книгам сам знаешь кого]
+Suspicious, isn’t it? Some people even believe that the writer’s pugs (yes, small dogs!) help her type the books. 🐕
 
-So we decided to analyse the authorship of these books to shed light on this mystery and to ensure that our work is not only entertaining, we plan to consider applying similar analysis in other areas.  We do not claim 100% truth in our conclusions and our analysis is not final. However, you can follow us on the path to solving this riddle. Let's go!
+
+<img src="images/pug_detective.jpeg" alt="Pug detective" width="100">
+
+*The real ghostwriters? We may never know...*
+
+So, we decided to analyse the authorship of these books to shed light on this mystery. We also hope this project can inspire similar analyses in other fields.  
+Of course, we do not claim **100% truth** in our conclusions — but you can join us on this journey to solve the riddle.
+
+A small spoiler: we created a **pipeline for text authorship analysis using k-mers**. This is a new approach for stylometry, so be patient and read until the end!
+
 
 ## Data description
 
-- 341 books of the author of interest
-- [ сколько-то других детективов ]
-- 5 generated texts
-- 5 interviews
-- 2 fanfics
-- And 6 pugs (ok, it is just a joke; 6 funny and positive people)
+- **341 books** of the author of interest
+- **10 other detective novels** (control group 1)
+- **10 other detective novels** (control group 2)
+- **10 other detective novels** (control group 3)
+- **5 generated texts**
+- **5 interviews**
+- **2 fan-fiction**
+- **And 6 pugs** (ok, that last one is a joke — actually 6 funny and positive people 😄)
 
 ## Required packages
 
-1) Stylo (in R), standart pipeline
-
-2) Spacy (library for advanced Natural Language Processing - NLP), for preprocessing
-
-```bash
-conda install -c conda-forge spacy
-python -m spacy download ru_core_news_sm # download russian language model
-```
-
-3) [Библиотеки для dimentionality reduction]
-
-4) [Библиотеки для topology]
-
-5) [Библиотеки для k-mer]
+1. **[Stylo](https://github.com/computationalstylistics/stylo)** (R package for stylometry)
+2. **[spaCy](https://spacy.io/usage/spacy-101#whats-spacy)** (advanced NLP library for Python), used for preprocessing
+3. **[GigaChain](https://github.com/ai-forever/gigachain)** used for text generation in the style of the author
+4. **[scikit-learn](https://scikit-learn.org/stable/)** used for dimentionality reduction
+5. [Библиотеки для topology]
+6. **[NetworkX](https://networkx.org/documentation/stable/tutorial.html)** used for construction of graphs
 
 ## Data preparation
 
-1) Books can be downloaded in different formats, however for our analysis we decided to use .txt format, so we wrote convertor for .fb2 files, which you can see in [название файла]
+1) Books come in different formats, but we decided to use .txt. We wrote a converter from .fb2 → .txt, which can be found here: [название файла]
 
-2) We wanted to test different methods and ways of text preprocessing, so we tried several approaches, notebook can be found in file [название файла]:
-- original text
-- text, where words were reduced to lemmas (бегал → бегать, бежит → бегать; слону → слон, слона → слон)
-- text, where words were reduced to lemmas, all punctuation and stop words were removed from text (*stop words - the most common words of the language)
-- text, where words were reduced to the parts of speech (слон → NOUN, бегать → VERB, огромный → ADJ), all punctuation and stop words were removed from text
-- text, where words were reduced to the parts of speech. Them parts of speech were encoded as one-letter:
-(a) ADJ-adjective 
-(b) ADP-adposition 
-(c) ADV-adverb
-(d) AUX-auxiliary verb 
-(e) CCONJ-coordinating conjunction 
-(f) DET-determiner 
-(g) INTJ-interjection 
-(h) NOUN-noun, PROPN-proper noun
-(i) NUM-numeral 
-(j) PART-particle
-(k) PRON-pronoun
-(m) SCONJ-subordinating conjunction
-(n) SYM-symbol
-(o) VERB-verb
-(p) X-other
+2) We tested several preprocessing methods (see [название файла]):
+
+- Original text
+- Lemmatized text (e.g., бегал → бегать, слону → слон)
+- Lemmatized text without punctuation and stopwords (stopwords — the most common words in a language).
+- Reduced to parts of speech (e.g., слон → NOUN, бегать → VERB) without stopwords/punctuation
+- Parts of speech encoded as one-letter codes:
+  - a = ADJ   (adjective)
+  - b = ADP   (adposition)
+  - c = ADV   (adverb)
+  - etc...
+
+## Generation of Neuroversion of our author books
+
+
 
 ## Analysis
 
-1) Classical method which is used in stulometry is stylo R package. [добавить описание этого пакета]. [Добавить описание результатов и картинки]
+1) We used the stylo R package — a standard tool in stylometry for comparing texts using word frequencies.
+
+[картинки результатов и описание]
 
 [example of the frequency table]
 
-2) Dimentionality reduction based on table with frequences of words. These frequencies are obtained from the stylo package
+2) Based on word frequency tables from stylo, we applied dimentionality reduction:
 
 - PCA
 - tSNE
 
+[картинки результатов и описание]
+
 3) Topological analysis
 
-The basic idea of the analysis is the following: we obtain frequency of each word/part_of_speech in the book. Then we performed paiwise comparison for these tables based on cosine distance. Next according to the algorithm we plotted obtained distances and tried to tune parameter of model to make clusters of these differences, so the idea in to find more or less similar paiwise differences. Details for math fans can be found in [ссылка на статью]
+The idea:
 
+1. Get frequency of each word/POS (part of speech) in each book.
+2. Compute pairwise distances (cosine distance).
+3. Plot distances as a topological graph and tune parameters to detect clusters.
+
+Details for math fans: [ссылка на статью]
+
+[картинки результатов и описание]
 
 4) Adaptation of k-mer analysis from bioinformatics
 
-[Андрей]
+We wanted to analyze how much an author maintains its grammatical style, how it changes and evolves throughout the works. So we adapted k-mer frequency analysis to grammar patterns. For k from 2 to 10, we calculated frequency of POS sequences for each book. By comparing sets between books and with the general pool of k-dimensional sets, we can check how similar each text is to the next. Then we cluster the results.
+
+[картинки результатов и описание]
